@@ -56,12 +56,10 @@ class ScoreEntry
 
         if (se.toreHome > se.toreOpp)
         {
-            score += 3;
             countWin++;
         }
         else if (se.toreHome == se.toreOpp)
         {
-            score += 1;
             countTie++;
         }
         else
@@ -83,17 +81,15 @@ class ScoreEntry
 
         if (se.toreHome > se.toreOpp)
         {
-            score += 3;
-            countWin++;
+            countWin--;
         }
         else if (se.toreHome == se.toreOpp)
         {
-            score += 1;
-            countTie++;
+            countTie--;
         }
         else
         {
-            countLoss++;
+            countLoss--;
         }
     }
 

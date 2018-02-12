@@ -21,6 +21,7 @@ public class Main extends Application
 
         Pane root = view.getView();
         Scene scene = new Scene(root, 600, 600);
+        primaryStage.setTitle("Ergebnisse");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -56,6 +56,7 @@ public class NewMatchDialog
 
         Scene scene = new Scene(root);
         stage = new Stage();
+        stage.setTitle("Dialog");
         stage.setScene(scene);
 
     }

@@ -1,31 +1,37 @@
 package gui.exam;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Model
 {
+    private Presenter presenter;
+
     private List<Match> matches;
+
     private List<ScoreEntry> scores;
-    
+
     public Model()
     {
         matches = new ArrayList<>();
         scores = new ArrayList<>();
     }
-    
+
     public void addMatch(Match m)
     {
+        System.out.println(m);
         matches.add(m);
         addScores(m.getTeamHome(), m.getGoalsHome(), m.getGoalsGuest());
         addScores(m.getTeamGuest(), m.getGoalsGuest(), m.getGoalsHome());
-        scores.sort(Comparator.comparingInt((p)->-p.getScore()));
+        scores.sort(Comparator.comparingInt((p) -> -p.getScore()));
     }
 
     private void addScores(String team, int goalsTeam, int goalsOpponent)
     {
         ScoreEntry newSe = new ScoreEntry(team, goalsTeam, goalsOpponent);
         int index = scores.indexOf(newSe);
-        if(index == -1)
+        if (index == -1)
         {
             scores.add(newSe);
         }
@@ -35,20 +41,20 @@ public class Model
             oldSe.add(newSe);
         }
     }
-    
+
     public void deleteMatch(Match m)
     {
         matches.remove(m);
         subtractScores(m.getTeamHome(), m.getGoalsHome(), m.getGoalsGuest());
         subtractScores(m.getTeamGuest(), m.getGoalsGuest(), m.getGoalsHome());
-        scores.sort(Comparator.comparingInt((p)->-p.getScore()));
+        scores.sort(Comparator.comparingInt((p) -> -p.getScore()));
     }
 
     private void subtractScores(String team, int goalsTeam, int goalsOpponent)
     {
         ScoreEntry newSe = new ScoreEntry(team, goalsTeam, goalsOpponent);
         int index = scores.indexOf(newSe);
-        if(index >= 0)
+        if (index >= 0)
         {
             ScoreEntry oldSe = scores.get(index);
             oldSe.subtract(newSe);
@@ -63,5 +69,10 @@ public class Model
     public ScoreEntry[] getAllScores()
     {
         return scores.toArray(new ScoreEntry[0]);
+    }
+
+    public void setPresenter(Presenter p)
+    {
+        this.presenter = p;
     }
 }

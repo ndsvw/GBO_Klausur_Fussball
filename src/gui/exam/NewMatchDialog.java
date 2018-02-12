@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class NewMatchDialog
 {
+    private View view;
+
     private Stage stage;
 
     private TextField textFieldTeam1;
@@ -26,8 +28,9 @@ public class NewMatchDialog
 
     private Label log;
 
-    public NewMatchDialog()
+    public NewMatchDialog(View view)
     {
+        this.view = view;
         VBox root = new VBox();
 
         HBox hBox1 = new HBox();
@@ -68,7 +71,7 @@ public class NewMatchDialog
         {
             if (Integer.valueOf(textFieldResult1.getText()) >= 0 && Integer.valueOf(textFieldResult2.getText()) >= 0)
             {
-
+                view.submitNewMatch(new Match(textFieldTeam1.getText(), textFieldTeam2.getText(), Integer.valueOf(textFieldResult1.getText()), Integer.valueOf(textFieldResult2.getText())));
                 stage.close();
             }
             else

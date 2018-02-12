@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 
 public class View extends VBox
 {
+    private Presenter presenter;
 
     private ListView<Match> list1 = new ListView<Match>();
 
@@ -37,24 +38,33 @@ public class View extends VBox
         return this;
     }
 
+    public void setPresenter(Presenter p)
+    {
+        this.presenter = p;
+    }
+
     public void addMatch(Match m)
     {
-
+        list1.getItems().add(m);
     }
 
     public void deleteMatch(Match m)
     {
-
+        list1.getItems().remove(m);
     }
 
     public void updateScores(ScoreEntry[] s)
     {
-
+        list2.getItems().clear();
+        for (ScoreEntry se : s)
+        {
+            list2.getItems().add(se);
+        }
     }
 
     public void showAddDialog()
     {
-        NewMatchDialog n = new NewMatchDialog();
+        NewMatchDialog n = new NewMatchDialog(this);
         n.show();
     }
 
@@ -63,7 +73,12 @@ public class View extends VBox
         // es ist ein Match ausgewählt
         if (list1.getSelectionModel().getSelectedItem() != null)
         {
-
+            presenter.deleteMatch(list1.getSelectionModel().getSelectedItem());
         }
+    }
+
+    public void submitNewMatch(Match m)
+    {
+        presenter.addMatch(m);
     }
 }

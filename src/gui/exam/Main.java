@@ -13,6 +13,12 @@ public class Main extends Application
     {
         Model model = new Model();
         View view = new View();
+        Presenter presenter = new Presenter();
+        presenter.setModel(model);
+        presenter.setView(view);
+        view.setPresenter(presenter);
+        model.setPresenter(presenter);
+
         Pane root = view.getView();
         Scene scene = new Scene(root, 600, 600);
         primaryStage.setScene(scene);
